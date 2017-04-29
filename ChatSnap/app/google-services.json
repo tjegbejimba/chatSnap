@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "966210510786",
+    "firebase_url": "https://chatsnap-6f27c.firebaseio.com",
+    "project_id": "chatsnap-6f27c",
+    "storage_bucket": "chatsnap-6f27c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:966210510786:android:28ea8e48594ba883",
+        "android_client_info": {
+          "package_name": "com.live.tj98.chatsnap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "966210510786-r484k5lqus3tkf308ikr257btspe5va4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.live.tj98.chatsnap",
+            "certificate_hash": "e1dec56e93084c697856a21afe4cf755625057f5"
+          }
+        },
+        {
+          "client_id": "966210510786-ad2bv2lq66i2t8s7qa2jgdhm5ki2of7q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqZB_XQiQjEi7ZV72pXpAcbnRfqg1AG3o"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "966210510786-ad2bv2lq66i2t8s7qa2jgdhm5ki2of7q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
