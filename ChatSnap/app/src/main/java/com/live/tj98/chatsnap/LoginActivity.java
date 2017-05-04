@@ -68,6 +68,12 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
     public void signIn(View v) {
         String tempE = email.getText().toString();
         String tempP = password.getText().toString();
@@ -87,9 +93,8 @@ public class LoginActivity extends AppCompatActivity {
                                         Toast.LENGTH_SHORT).show();
                                 return;
                             }
-                            if(!mAuth.getCurrentUser().isEmailVerified())
-                            {
-                                Toast.makeText(LoginActivity.this,"Please verify account",Toast.LENGTH_SHORT).show();
+                            if (!mAuth.getCurrentUser().isEmailVerified()) {
+                                Toast.makeText(LoginActivity.this, "Please verify account", Toast.LENGTH_SHORT).show();
                                 return;
                             }
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);

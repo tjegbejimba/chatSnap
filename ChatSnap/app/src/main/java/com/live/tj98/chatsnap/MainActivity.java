@@ -6,11 +6,18 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,10 +29,12 @@ import com.live.tj98.chatsnap.ChatsActivity;
 import java.util.HashMap;
 import java.util.Map;
 
+import butterknife.OnItemSelected;
+
 public class MainActivity extends AppCompatActivity {
 
     private TextView mMessageTextView;
-
+    private FirebaseAuth mAuth;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference mMessageRef = database.getReference("message");
     DatabaseReference mDirectoryRef = database.getReference("directory");
@@ -34,16 +43,39 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView mChatRoomRecyclerView;
     private FirebaseRecyclerAdapter<ChatRoomDesc, ChatRoomViewHolder> mAdapter;
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater somwthin = getMenuInflater();
+        somwthin.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.signOut:
+                mAuth.signOut();
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                Toast.makeText(MainActivity.this, "Signed Out",
+                        Toast.LENGTH_SHORT).show();
+                startActivity(intent);
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        mAuth = FirebaseAuth.getInstance();
         mNewRoomEditText = (EditText) findViewById(R.id.newRoomText);
         mChatRoomRecyclerView = (RecyclerView) findViewById(R.id.chatRoomRecyclerView);
         mChatRoomRecyclerView.setHasFixedSize(true);
-        //mChatRoomRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mChatRoomRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
         mMessageTextView = (TextView) findViewById(R.id.messageTextView2);
         mMessageRef.addValueEventListener(new ValueEventListener() {
@@ -91,6 +123,12 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                 });
+            }
+
+            @Override
+            public ChatRoomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                final View view = LayoutInflater.from(parent.getContext()).inflate(viewType, parent, false);
+                return new ChatRoomViewHolder(view);
             }
 
             @Override

@@ -56,7 +56,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         // TODO(developer): Handle FCM messages here.
         // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
         Log.d(TAG, "From: " + remoteMessage.getFrom());
-
         // Check if message contains a data payload.
         if (remoteMessage.getData().size() > 0) {
             Log.d(TAG, "Message data payload: " + remoteMessage.getData());
@@ -109,8 +108,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
      *
      * @param messageBody FCM message body received.
      */
-    private void sendNotification(String sender, String messageBody) {
-        Intent intent = new Intent(this, ChatsActivity.class);
+    protected void sendNotification(String sender, String messageBody) {
+        Intent intent = new Intent(MyFirebaseMessagingService.this, ChatsActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);

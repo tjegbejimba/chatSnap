@@ -16,7 +16,8 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="12dp"
-        android:id="@+id/chat_recycler_view"/>
+        android:id="@+id/chat_recycler_view"
+        android:layout_above="@+id/postButton" />
 
     <Button
         android:id="@+id/postButton"
